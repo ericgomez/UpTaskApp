@@ -8,5 +8,9 @@ const projectsController = require('../controllers/projectsController')
 module.exports = () => {
   router.get('/', projectsController.projectsHome)
 
+  router.get('/about', (req, res) => {
+    res.render('about')
+  })
+
   return router
 }
