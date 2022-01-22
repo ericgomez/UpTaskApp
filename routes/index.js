@@ -1,15 +1,14 @@
 const express = require('express')
 const router = express.Router()
 
+// import the controller
+const projectsController = require('../controllers/projectsController')
+
 // route to home page
 module.exports = () => {
-  router.get('/', (req, res) => {
-    res.send('Home')
-  })
+  router.get('/', projectsController.projectsHome)
 
-  router.get('/we', (req, res) => {
-    res.send('About us')
-  })
+  router.get('/about', projectsController.projectsAbout)
 
   return router
 }
