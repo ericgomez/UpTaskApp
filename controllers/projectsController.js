@@ -11,5 +11,5 @@ exports.formProject = (req, res) => {
 }
 
 exports.createProject = (req, res) => {
-  res.send('Sending new project')
+  console.log(req.body)
 }
