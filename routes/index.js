@@ -9,5 +9,7 @@ module.exports = () => {
   router.get('/', projectsController.projectsHome)
   router.get('/new-project', projectsController.formProject)
 
+  router.post('/new-project', projectsController.createProject)
+
   return router
 }

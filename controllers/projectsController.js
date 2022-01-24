@@ -9,3 +9,7 @@ exports.formProject = (req, res) => {
     namePage: 'New Project'
   })
 }
+
+exports.createProject = (req, res) => {
+  res.send('Sending new project')
+}

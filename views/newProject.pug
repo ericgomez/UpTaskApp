@@ -4,7 +4,7 @@ block content
   .content-principal
     h1 #{namePage}
 
-    form.add-project
+    form.add-project(action="/new-project" method="post")
       .campo
         label(for="name") Name Project
         input(type="text" name="name" id="name" placeholder="Name Project")
