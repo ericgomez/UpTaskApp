@@ -1,7 +1,9 @@
 const { Sequelize } = require('sequelize')
 
 // Passing parameters separately
-const sequelize = new Sequelize('tasks_app', 'root', 'root', {
+const db = new Sequelize('tasks_app', 'root', 'root', {
   host: 'localhost',
   dialect: 'mariadb'
 })
+
+module.exports = db
