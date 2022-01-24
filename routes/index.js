@@ -7,6 +7,7 @@ const projectsController = require('../controllers/projectsController')
 // route to home page
 module.exports = () => {
   router.get('/', projectsController.projectsHome)
+  router.get('/new-project', projectsController.formProject)
 
   return router
 }
