@@ -3,3 +3,10 @@ extends layout
 block content 
   .content-principal
     h1 #{namePage}
+
+    form.add-project
+      .campo
+        label(for="name") Name Project
+        input(type="text" name="name" id="name" placeholder="Name Project")
+      .campo.send 
+        input(type="submit" value="Add Project" class="button")
