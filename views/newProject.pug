@@ -4,6 +4,10 @@ block content
   .content-principal
     h1 #{namePage}
 
+    if errors 
+      each error in errors
+        .alert.error #{error.text}
+
     form.add-project(action="/new-project" method="post")
       .campo
         label(for="name") Name Project

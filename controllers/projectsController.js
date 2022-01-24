@@ -11,5 +11,24 @@ exports.formProject = (req, res) => {
 }
 
 exports.createProject = (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
+  const { name } = req.body
+
+  let errors = []
+
+  if (!name) {
+    errors.push({ text: 'Please add a name' })
+  }
+
+  if (errors.length > 0) {
+    res.render('newProject', {
+      namePage: 'New Project',
+      errors
+    })
+  } else {
+    res.render('newProject', {
+      namePage: 'New Project'
+      // TODO: insert in DB
+    })
+  }
 }
