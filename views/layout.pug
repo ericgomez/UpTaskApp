@@ -20,12 +20,19 @@ html(lang="en")
         .panel.list-projects
           h2 Projects 
           ul#projects.projects 
-            li 
-              a(href="#") Virtual Store Design
-            li 
-              a(href="#") New Blog Design
-            li 
-              a(href="#") Logo Design      
+            if(projects.length > 0)
+              each project in projects
+                li
+                  a(href=`/project/${project.url}`) #{project.name}
+            else
+              li No projects
+
+            //- li 
+            //-   a(href="#") Virtual Store Design
+            //- li 
+            //-   a(href="#") New Blog Design
+            //- li 
+            //-   a(href="#") Logo Design      
 
 
       block content
