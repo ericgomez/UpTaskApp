@@ -54,3 +54,12 @@ exports.projectDetail = async (req, res, next) => {
     project
   })
 }
+
+exports.formEdit = async (req, res) => {
+  const projects = await Projects.findAll()
+
+  res.render('newProject', {
+    namePage: 'Edit Project ',
+    projects
+  })
+}

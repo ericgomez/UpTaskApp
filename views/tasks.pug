@@ -3,3 +3,13 @@ extends layout
 block content 
   .content-principal
     h1 #{namePage}
+
+    // TODO: Form here
+
+    // TODO: Pending tasks here
+    pre #{varDump(project)}
+
+    // TODO: Actions that can be done here
+    .container-actions 
+      a(href=`/project/edit/${project.id}` class="button") Edit project
+      button#delete-project(type="button" class="button delete") Delete project

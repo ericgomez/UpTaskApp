@@ -23,5 +23,7 @@ module.exports = () => {
 
   router.get('/project/:url', projectsController.projectDetail)
 
+  // update project
+  router.get('/project/edit/:id', projectsController.formEdit)
   return router
 }
