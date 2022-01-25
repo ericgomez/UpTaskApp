@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
+// import express-validator
+const { body } = require('express-validator/check')
+
 // import the controller
 const projectsController = require('../controllers/projectsController')
 
@@ -9,7 +12,14 @@ module.exports = () => {
   router.get('/', projectsController.projectsHome)
   router.get('/new-project', projectsController.formProject)
 
-  router.post('/new-project', projectsController.createProject)
+  router.post(
+    '/new-project',
+    body('name')
+      .isLength({ min: 3 })
+      .trim()
+      .escape(),
+    projectsController.createProject
+  )
 
   return router
 }
