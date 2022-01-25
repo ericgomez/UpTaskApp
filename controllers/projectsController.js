@@ -55,11 +55,17 @@ exports.projectDetail = async (req, res, next) => {
   })
 }
 
-exports.formEdit = async (req, res) => {
+exports.formEdit = async (req, res, next) => {
   const projects = await Projects.findAll()
+  const project = await Projects.findOne({ where: { id: req.params.id } })
 
+  // in case the project doesn't exist return null
+  if (!project) return next()
+
+  // res.send('Detail of the project: ' + project.name)
   res.render('newProject', {
     namePage: 'Edit Project ',
-    projects
+    projects,
+    project
   })
 }

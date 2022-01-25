@@ -1,16 +1,15 @@
 extends layout 
 
+include mixins/createProject
+
 block content 
   .content-principal
     h1 #{namePage}
 
+    //- pre #{varDump(project)}
+
     if errors 
       each error in errors
         .alert.error #{error.text}
+    +createProject(project)
 
-    form.add-project(action="/new-project" method="post")
-      .campo
-        label(for="name") Name Project
-        input(type="text" name="name" id="name" placeholder="Name Project")
-      .campo.send 
-        input(type="submit" value="Add Project" class="button")

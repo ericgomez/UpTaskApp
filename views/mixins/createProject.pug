@@ -1,0 +1,8 @@
+mixin createProject(project = {})
+  //- required indentation for the mixin
+  form.add-project(action=`/new-project/${project.id || ''}` method="post")
+    .campo
+      label(for="name") Name Project
+      input(value=project.name type="text" name="name" id="name" placeholder="Name Project")
+    .campo.send 
+      input(type="submit" value=`${project.name ? 'Save Project' : 'Add Project'}` class="button")
