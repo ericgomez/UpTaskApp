@@ -1,3 +1,5 @@
+const Projects = require('../models/Projects')
+
 exports.projectsHome = (req, res) => {
   res.render('index', {
     namePage: 'Projects'
@@ -26,9 +28,9 @@ exports.createProject = (req, res) => {
       errors
     })
   } else {
-    res.render('newProject', {
-      namePage: 'New Project'
-      // TODO: insert in DB
-    })
+    // TODO: insert in DB
+    Projects.create({ name })
+      .then(() => console.log('Project created'))
+      .catch(err => console.log(err))
   }
 }
