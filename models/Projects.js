@@ -23,6 +23,10 @@ const Projects = db.define(
       beforeCreate: project => {
         const url = slug(project.name).toLowerCase()
         project.url = `${url}-${shortid.generate()}`
+      },
+      beforeUpdate: project => {
+        const url = slug(project.name).toLowerCase()
+        project.url = `${url}-${shortid.generate()}`
       }
     }
   }

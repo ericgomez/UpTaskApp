@@ -25,5 +25,14 @@ module.exports = () => {
 
   // update project
   router.get('/project/edit/:id', projectsController.formEdit)
+  router.post(
+    '/new-project/:id',
+    body('name')
+      .isLength({ min: 3 })
+      .trim()
+      .escape(),
+    projectsController.updateProject
+  )
+
   return router
 }

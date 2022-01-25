@@ -69,3 +69,26 @@ exports.formEdit = async (req, res, next) => {
     project
   })
 }
+
+exports.updateProject = async (req, res) => {
+  const projects = await Projects.findAll()
+  const { name } = req.body
+
+  let errors = []
+
+  if (!name) {
+    errors.push({ text: 'Please add a name' })
+  }
+
+  if (errors.length > 0) {
+    res.render('newProject', {
+      namePage: 'New Project',
+      projects,
+      errors
+    })
+  } else {
+    // TODO: update in DB
+    await Projects.update({ name }, { where: { id: req.params.id } })
+    res.redirect('/')
+  }
+}
