@@ -36,3 +36,9 @@ exports.createProject = async (req, res) => {
     res.redirect('/')
   }
 }
+exports.projectDetail = (req, res) => {
+  res.send(req.params.url)
+  // res.render('projectDetail', {
+  //   namePage: 'Project Detail'
+  // })
+}

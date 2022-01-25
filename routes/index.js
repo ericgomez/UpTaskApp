@@ -21,5 +21,7 @@ module.exports = () => {
     projectsController.createProject
   )
 
+  router.get('/project/:url', projectsController.projectDetail)
+
   return router
 }
