@@ -3,6 +3,9 @@ const routes = require('./routes')
 const path = require('path')
 const bodyParser = require('body-parser')
 
+// helpers with some functions
+const helpers = require('./helpers')
+
 // Create connection to database
 const db = require('./config/db')
 
@@ -23,6 +26,12 @@ app.use(express.static('public'))
 app.set('view engine', 'pug')
 // Add folder views as a static folder
 app.set('views', path.join(__dirname, './views'))
+
+// Pass helper to application
+app.use((req, res, next) => {
+  res.locals.varDump = helpers.varDump
+  next()
+})
 
 // Enabling body-parser to read data from POST
 app.use(bodyParser.urlencoded({ extended: true }))

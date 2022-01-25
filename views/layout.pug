@@ -25,14 +25,10 @@ html(lang="en")
                 li
                   a(href=`/project/${project.url}`) #{project.name}
             else
-              li No projects
-
-            //- li 
-            //-   a(href="#") Virtual Store Design
-            //- li 
-            //-   a(href="#") New Blog Design
-            //- li 
-            //-   a(href="#") Logo Design      
+              li No projects    
 
 
       block content
+      
+      pre #{varDump(projects)}
+    
