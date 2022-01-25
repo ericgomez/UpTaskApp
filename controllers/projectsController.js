@@ -9,14 +9,17 @@ exports.projectsHome = async (req, res) => {
   })
 }
 
-exports.formProject = (req, res) => {
+exports.formProject = async (req, res) => {
+  const projects = await Projects.findAll()
+
   res.render('newProject', {
-    namePage: 'New Project'
+    namePage: 'New Project',
+    projects
   })
 }
 
 exports.createProject = async (req, res) => {
-  // console.log(req.body)
+  const projects = await Projects.findAll()
   const { name } = req.body
 
   let errors = []
@@ -28,6 +31,7 @@ exports.createProject = async (req, res) => {
   if (errors.length > 0) {
     res.render('newProject', {
       namePage: 'New Project',
+      projects,
       errors
     })
   } else {
@@ -36,9 +40,17 @@ exports.createProject = async (req, res) => {
     res.redirect('/')
   }
 }
-exports.projectDetail = (req, res) => {
-  res.send(req.params.url)
-  // res.render('projectDetail', {
-  //   namePage: 'Project Detail'
-  // })
+exports.projectDetail = async (req, res, next) => {
+  const projects = await Projects.findAll()
+  const project = await Projects.findOne({ where: { url: req.params.url } })
+
+  // in case the project doesn't exist return null
+  if (!project) return next()
+
+  // res.send('Detail of the project: ' + project.name)
+  res.render('tasks', {
+    namePage: 'Task Detail of ' + project.name,
+    projects,
+    project
+  })
 }
