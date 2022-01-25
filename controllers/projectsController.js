@@ -12,7 +12,7 @@ exports.formProject = (req, res) => {
   })
 }
 
-exports.createProject = (req, res) => {
+exports.createProject = async (req, res) => {
   // console.log(req.body)
   const { name } = req.body
 
@@ -29,8 +29,7 @@ exports.createProject = (req, res) => {
     })
   } else {
     // TODO: insert in DB
-    Projects.create({ name })
-      .then(() => console.log('Project created'))
-      .catch(err => console.log(err))
+    const projects = await Projects.create({ name })
+    res.redirect('/')
   }
 }
