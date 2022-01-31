@@ -43,5 +43,7 @@ module.exports = () => {
 
   router.patch('/task/:id', tasksController.updateTask)
 
+  router.delete('/task/:id', tasksController.deleteTask)
+
   return router
 }

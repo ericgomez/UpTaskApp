@@ -1,3 +1,4 @@
+const res = require('express/lib/response')
 const Projects = require('../models/Projects')
 const Tasks = require('../models/Tasks')
 
@@ -26,4 +27,8 @@ exports.updateTask = async (req, res, next) => {
   if (!result) next()
 
   res.status(200).send('Updated task')
+}
+
+exports.deleteTask = async (req, res, next) => {
+  res.send('delete task')
 }
