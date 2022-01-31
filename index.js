@@ -11,6 +11,7 @@ const db = require('./config/db')
 
 // Import models
 require('./models/Projects')
+require('./models/Tasks')
 
 db.sync()
   .then(() => console.log('Connection has been established successfully.'))
