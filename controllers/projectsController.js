@@ -50,6 +50,11 @@ exports.projectDetail = async (req, res, next) => {
     projectPromise
   ])
 
+  const tasks = await Tasks.findAll({
+    where: { projectId: project.id }
+    // include: [{ model: Projects }] // include is equal a JOIN
+  })
+
   // in case the project doesn't exist return null
   if (!project) return next()
 
@@ -57,7 +62,8 @@ exports.projectDetail = async (req, res, next) => {
   res.render('tasks', {
     namePage: 'Task Detail of ' + project.name,
     projects,
-    project
+    project,
+    tasks
   })
 }
 
