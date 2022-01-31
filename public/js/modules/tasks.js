@@ -39,7 +39,12 @@ if (tasks) {
           const url = `${location.origin}/task/${idTask}`
 
           axios.delete(url, { params: { idTask } }).then(res => {
-            console.log(res)
+            if (res.status === 200) {
+              taskHTML.remove()
+
+              //optional alert
+              Swal.fire('Deleted!', res.data, 'success')
+            }
           })
         }
       })
