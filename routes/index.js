@@ -34,5 +34,8 @@ module.exports = () => {
     projectsController.updateProject
   )
 
+  // delete project
+  router.delete('/project/:url', projectsController.deleteProject)
+
   return router
 }

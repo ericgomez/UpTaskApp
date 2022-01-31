@@ -22,19 +22,22 @@ if (btnDelete) {
     }).then(result => {
       if (result.isConfirmed) {
         // Send the request to the server with axios
-        const url = `${location.origin}/projects/${urlProject}`
+        const url = `${location.origin}/project/${urlProject}`
 
-        axios.delete(url, { params: urlProject }).then(response => {
-          console.log(response)
-        })
+        axios
+          .delete(url, { params: { urlProject } })
+          .then(response => {
+            console.log(response)
+            Swal.fire('Deleted!', response.data, 'success')
 
-        return
-        Swal.fire('Deleted!', 'Your project has been deleted.', 'success')
-
-        // redirect at home
-        setTimeout(() => {
-          window.location.href = '/'
-        }, 3000)
+            // redirect at home
+            setTimeout(() => {
+              window.location.href = '/'
+            }, 3000)
+          })
+          .catch(error => {
+            console.log(error)
+          })
       }
     })
   })
