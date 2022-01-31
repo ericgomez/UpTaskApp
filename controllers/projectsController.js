@@ -1,4 +1,5 @@
 const Projects = require('../models/Projects')
+const Tasks = require('../models/Tasks')
 
 exports.projectsHome = async (req, res) => {
   const projects = await Projects.findAll()
@@ -41,8 +42,13 @@ exports.createProject = async (req, res) => {
   }
 }
 exports.projectDetail = async (req, res, next) => {
-  const projects = await Projects.findAll()
-  const project = await Projects.findOne({ where: { url: req.params.url } })
+  const projectsPromise = Projects.findAll()
+  const projectPromise = Projects.findOne({ where: { url: req.params.url } })
+
+  const [projects, project] = await Promise.all([
+    projectsPromise,
+    projectPromise
+  ])
 
   // in case the project doesn't exist return null
   if (!project) return next()
