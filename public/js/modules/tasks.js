@@ -13,7 +13,9 @@ if (tasks) {
       // request to /task/:id
       const url = `${location.origin}/task/${idTask}`
       axios.patch(url, { idTask }).then(res => {
-        console.log(res)
+        if (res.status === 200) {
+          icon.classList.toggle('complete')
+        }
       })
     }
   })
