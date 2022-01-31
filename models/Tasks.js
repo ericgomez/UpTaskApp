@@ -9,7 +9,10 @@ const Tasks = db.define('tasks', {
     autoIncrement: true
   },
   task: Sequelize.STRING(100),
-  status: Sequelize.INTEGER(1)
+  status: {
+    type: Sequelize.INTEGER(1),
+    defaultValue: 0
+  }
 })
 
 // Tasks belongs to a project
