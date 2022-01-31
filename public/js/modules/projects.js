@@ -37,6 +37,11 @@ if (btnDelete) {
           })
           .catch(error => {
             console.log(error)
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong, the project could not be deleted!'
+            })
           })
       }
     })
