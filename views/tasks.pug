@@ -11,8 +11,24 @@ block content
       .campo.send
         input.button.new-task(type="submit" value="Add Task")
 
-    // TODO: Pending tasks here
-    pre #{varDump(tasks)}
+    .list-slopes
+      ul 
+        if tasks.length
+          each task in tasks 
+            li.task 
+              p #{task.task}
+              .actions
+                if task.status
+                  i.far.fa-check-circle.complete
+                else 
+                  i.far.fa-check-circle
+                i.fas.fa-trash
+        else 
+          li
+            p No tasks
+
+
+    //- pre #{varDump(tasks)}
 
     // TODO: Actions that can be done here
     .container-actions 
