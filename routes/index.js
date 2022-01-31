@@ -41,5 +41,7 @@ module.exports = () => {
   // TASKS
   router.post('/project/:url', tasksController.addTask)
 
+  router.patch('/task/:id', tasksController.updateTask)
+
   return router
 }

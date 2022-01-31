@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const tasks = document.querySelector('.list-slopes')
 
 if (tasks) {
@@ -8,7 +10,11 @@ if (tasks) {
       // dateset = get the value of an attribute custom to the element
       const idTask = icon.parentElement.parentElement.dataset.taskId
 
-      console.log(idTask)
+      // request to /task/:id
+      const url = `${location.origin}/task/${idTask}`
+      axios.patch(url, { idTask }).then(res => {
+        console.log(res)
+      })
     }
   })
 }

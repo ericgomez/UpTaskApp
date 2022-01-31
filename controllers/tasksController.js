@@ -13,3 +13,7 @@ exports.addTask = async (req, res, next) => {
 
   res.redirect(`/project/${req.params.url}`)
 }
+
+exports.updateTask = (req, res, next) => {
+  res.send('updateTask')
+}
