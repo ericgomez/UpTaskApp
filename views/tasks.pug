@@ -4,7 +4,12 @@ block content
   .content-principal
     h1 #{namePage}
 
-    // TODO: Form here
+    form.add-task(action=`/project/${project.url}` method="post")
+      .campo
+        label(for="task") Task:
+        input.name-task(type="text" name="task" placeholder="New Task")  
+      .campo.send
+        input.button.new-task(type="submit" value="Add Task")
 
     // TODO: Pending tasks here
     //- pre #{varDump(project)}

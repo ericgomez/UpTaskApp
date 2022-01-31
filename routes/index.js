@@ -6,6 +6,7 @@ const { body } = require('express-validator/check')
 
 // import the controller
 const projectsController = require('../controllers/projectsController')
+const tasksController = require('../controllers/tasksController')
 
 // route to home page
 module.exports = () => {
@@ -36,6 +37,9 @@ module.exports = () => {
 
   // delete project
   router.delete('/project/:url', projectsController.deleteProject)
+
+  // TASKS
+  router.post('/project/:url', tasksController.addTask)
 
   return router
 }
