@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const flash = require('connect-flash')
 const session = require('express-session')
 const cookieParse = require('cookie-parser')
+const passport = require('./config/passport')
 
 const routes = require('./routes')
 
@@ -50,6 +51,9 @@ app.use(
     saveUninitialized: false
   })
 )
+
+app.use(passport.initialize())
+app.use(passport.session)
 
 // Pass helper to application
 app.use((req, res, next) => {

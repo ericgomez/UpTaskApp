@@ -48,6 +48,11 @@ const Users = db.define(
   }
 )
 
+// Methods personality
+Users.prototype.validatePassword = function (password) {
+  return bcrypt.compareSync(password, this.password)
+}
+
 Users.hasMany(Projects)
 
 module.exports = Users
