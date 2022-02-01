@@ -7,8 +7,11 @@ exports.formCreateCount = (req, res) => {
 }
 
 exports.formLogin = (req, res) => {
+  const { error } = res.locals.messages
+
   res.render('login', {
-    namePage: 'Login in UpTask'
+    namePage: 'Login in UpTask',
+    error
   })
 }
 

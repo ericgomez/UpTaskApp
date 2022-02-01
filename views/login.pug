@@ -6,6 +6,9 @@ html(lang="en")
     .container-form 
       h1 Login in UpTask 
 
+      if error 
+        p.alert.error #{error}
+
       form#form.box.box-login(method="post" action="/login")
         .campo 
           label(for="email") Email
