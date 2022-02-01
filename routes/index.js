@@ -50,5 +50,8 @@ module.exports = () => {
   router.get('/create-count', usersController.formCreateCount)
   router.post('/create-count', usersController.createCount)
 
+  // login
+  router.get('/login', usersController.formLogin)
+
   return router
 }

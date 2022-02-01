@@ -6,7 +6,7 @@ html(lang="en")
     .container-form 
       h1 Create a new count in UpTask 
 
-      if locals.messages
+      if Object.keys(locals.messages).length
         .alert
           each category in Object.keys(locals.messages)
             each error in messages[category]
@@ -24,5 +24,3 @@ html(lang="en")
           input.button(type="submit" value="Create count")
         .campo 
           a(href="/login") Login
-
-    script(src="/dist/bundle.js")

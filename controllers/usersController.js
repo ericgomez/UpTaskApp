@@ -6,6 +6,12 @@ exports.formCreateCount = (req, res) => {
   })
 }
 
+exports.formLogin = (req, res) => {
+  res.render('login', {
+    namePage: 'Login in UpTask'
+  })
+}
+
 exports.createCount = async (req, res, next) => {
   // read data from form
   const { email, password } = req.body
