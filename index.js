@@ -1,7 +1,9 @@
 const express = require('express')
-const routes = require('./routes')
 const path = require('path')
 const bodyParser = require('body-parser')
+const flash = require('connect-flash')
+
+const routes = require('./routes')
 
 // helpers with some functions
 const helpers = require('./helpers')
@@ -21,6 +23,9 @@ db.sync()
 // Create a new express application instance
 const app = express()
 
+// Enabling body-parser to read data from POST
+app.use(bodyParser.urlencoded({ extended: true }))
+
 // Where to upload static files
 app.use(express.static('public'))
 
@@ -29,14 +34,14 @@ app.set('view engine', 'pug')
 // Add folder views as a static folder
 app.set('views', path.join(__dirname, './views'))
 
+// Add flash messages
+app.use(flash())
+
 // Pass helper to application
 app.use((req, res, next) => {
   res.locals.varDump = helpers.varDump
   next()
 })
-
-// Enabling body-parser to read data from POST
-app.use(bodyParser.urlencoded({ extended: true }))
 
 //routes of the application
 app.use('/', routes())
