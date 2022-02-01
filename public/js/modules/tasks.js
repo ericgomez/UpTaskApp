@@ -1,6 +1,8 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
+import { updateAdvance } from '../functions/advance'
+
 const tasks = document.querySelector('.list-slopes')
 
 if (tasks) {
@@ -16,6 +18,8 @@ if (tasks) {
       axios.patch(url, { idTask }).then(res => {
         if (res.status === 200) {
           icon.classList.toggle('complete')
+
+          updateAdvance()
         }
       })
     }
@@ -44,6 +48,8 @@ if (tasks) {
 
               //optional alert
               Swal.fire('Deleted!', res.data, 'success')
+
+              updateAdvance()
             }
           })
         }
