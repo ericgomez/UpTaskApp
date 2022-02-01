@@ -7,6 +7,7 @@ const { body } = require('express-validator/check')
 // import the controller
 const projectsController = require('../controllers/projectsController')
 const tasksController = require('../controllers/tasksController')
+const usersController = require('../controllers/usersController')
 
 // route to home page
 module.exports = () => {
@@ -44,6 +45,9 @@ module.exports = () => {
   router.patch('/task/:id', tasksController.updateTask)
 
   router.delete('/task/:id', tasksController.deleteTask)
+
+  // create new count
+  router.get('/create-count', usersController.formCreateCount)
 
   return router
 }
