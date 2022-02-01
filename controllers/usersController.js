@@ -28,7 +28,9 @@ exports.createCount = async (req, res, next) => {
     res.render('createCount', {
       // using error
       messages: req.flash(),
-      namePage: 'Create Count in UpTask'
+      namePage: 'Create Count in UpTask',
+      email,
+      password
     })
   }
 }

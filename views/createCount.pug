@@ -16,10 +16,10 @@ html(lang="en")
       form#form.box.box-login(method="post" action="/create-count")
         .campo 
           label(for="email") Email
-          input(type="text" name="email" placeholder="Email")
+          input(type="text" name="email" placeholder="Email" value= email)
         .campo
           label(for="password") Password
-          input(type="password" name="password" placeholder="Password")
+          input(type="password" name="password" placeholder="Password" value= password)
         .campo.send
           input.button(type="submit" value="Create count")
         .campo 
