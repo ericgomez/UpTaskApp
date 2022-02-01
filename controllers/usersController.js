@@ -19,8 +19,15 @@ exports.createCount = async (req, res, next) => {
 
     res.redirect('/login')
   } catch (error) {
+    // creating error with flash message
+    req.flash(
+      'error',
+      error.errors.map(error => error.message)
+    )
+
     res.render('createCount', {
-      errors: error.errors,
+      // using error
+      messages: req.flash(),
       namePage: 'Create Count in UpTask'
     })
   }
