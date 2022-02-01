@@ -48,6 +48,7 @@ module.exports = () => {
 
   // create new count
   router.get('/create-count', usersController.formCreateCount)
+  router.post('/create-count', usersController.createCount)
 
   return router
 }
