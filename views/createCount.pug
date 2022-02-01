@@ -6,6 +6,11 @@ html(lang="en")
     .container-form 
       h1 Create a new count in UpTask 
 
+      if errors
+        each error in errors
+          p.error.alert #{error.message}
+
+
       form#form.box.box-login(method="post" action="/create-count")
         .campo 
           label(for="email") Email

@@ -20,7 +20,7 @@ exports.createCount = async (req, res, next) => {
     res.redirect('/login')
   } catch (error) {
     res.render('createCount', {
-      error: error.errors,
+      errors: error.errors,
       namePage: 'Create Count in UpTask'
     })
   }
