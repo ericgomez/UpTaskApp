@@ -16,3 +16,9 @@ exports.isUserAuthenticate = (req, res, next) => {
 
   return res.redirect('/login')
 }
+
+exports.logout = (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/login')
+  })
+}

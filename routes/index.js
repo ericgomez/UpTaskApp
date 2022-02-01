@@ -89,5 +89,7 @@ module.exports = () => {
   router.get('/login', usersController.formLogin)
   router.post('/login', authController.userAuthenticate)
 
+  router.get('/logout', authController.logout)
+
   return router
 }
