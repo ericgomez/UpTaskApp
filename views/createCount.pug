@@ -2,6 +2,20 @@ doctype html
 html(lang="en")
   head
     include partials/header
-  body
+  body.login
+    .container-form 
+      h1 Create a new count in UpTask 
 
-  
+      form#form.box.box-login(method="post" action="/create-count")
+        .campo 
+          label(for="email") Email
+          input(type="email" name="email" placeholder="Email" required)
+        .campo
+          label(for="password") Password
+          input(type="password" name="password" placeholder="Password" required)
+        .campo.send
+          input.button(type="submit" value="Create count")
+        .campo 
+          a(href="/login") Login
+
+    script(src="/dist/bundle.js")
