@@ -69,6 +69,9 @@ exports.forgotPassword = async (req, res) => {
       resetUrl,
       file: 'reset-password'
     })
+
+    req.flash('correct', 'A message was send to your email')
+    res.redirect('/login')
   } catch (error) {
     console.log(error)
     res.redirect('/forgot-password')

@@ -5,9 +5,6 @@ html(lang="en")
   body.login
     .container-form 
       h1 Login in UpTask 
-
-      if error 
-        p.alert.error #{error}
       
       if Object.keys(locals.messages).length
         .alert
