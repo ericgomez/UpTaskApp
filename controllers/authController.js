@@ -1,7 +1,10 @@
+const { Sequelize } = require('sequelize')
 const passport = require('passport')
 const crypto = require('crypto')
 
 const Users = require('../models/Users')
+
+const Op = Sequelize.Op
 
 exports.userAuthenticate = passport.authenticate('local', {
   successRedirect: '/',
@@ -55,14 +58,14 @@ exports.forgotPassword = async (req, res) => {
     await user.save()
 
     // url
-    const resetUrl = `http://${req.headers.host}/forgot-password/${user.token}`
+    const resetUrl = `http://${req.headers.host}/reset-password/${user.token}`
     console.log(resetUrl)
   } catch (error) {
     res.redirect('/forgot-password')
   }
 }
 
-exports.resetPassword = async (req, res) => {
+exports.formResetPassword = async (req, res) => {
   const { token } = req.params
 
   const user = await Users.findOne({
@@ -79,4 +82,23 @@ exports.resetPassword = async (req, res) => {
   res.render('resetPassword', {
     namePage: 'Reset Password'
   })
+}
+
+exports.resetPassword = async (req, res) => {
+  const { token } = req.params
+
+  const user = await Users.findOne({
+    where: {
+      token,
+      // verifying date in database if mayor of date now
+      expirationToken: {
+        [Op.gte]: Date.now
+      }
+    }
+  })
+
+  if (!user) {
+    req.flash('error', 'User not valid')
+    res.redirect('/forgot-password')
+  }
 }
