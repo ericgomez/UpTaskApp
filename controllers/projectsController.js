@@ -2,9 +2,10 @@ const Projects = require('../models/Projects')
 const Tasks = require('../models/Tasks')
 
 exports.projectsHome = async (req, res) => {
-  console.log(res.locals.user)
+  // console.log(res.locals.user)
 
-  const projects = await Projects.findAll()
+  const userId = res.locals.user.id
+  const projects = await Projects.findAll({ where: { userId } })
 
   res.render('index', {
     namePage: 'Projects',
@@ -13,7 +14,8 @@ exports.projectsHome = async (req, res) => {
 }
 
 exports.formProject = async (req, res) => {
-  const projects = await Projects.findAll()
+  const userId = res.locals.user.id
+  const projects = await Projects.findAll({ where: { userId } })
 
   res.render('newProject', {
     namePage: 'New Project',
@@ -22,7 +24,9 @@ exports.formProject = async (req, res) => {
 }
 
 exports.createProject = async (req, res) => {
-  const projects = await Projects.findAll()
+  const userId = res.locals.user.id
+  const projects = await Projects.findAll({ where: { userId } })
+
   const { name } = req.body
 
   let errors = []
@@ -45,8 +49,12 @@ exports.createProject = async (req, res) => {
   }
 }
 exports.projectDetail = async (req, res, next) => {
-  const projectsPromise = Projects.findAll()
-  const projectPromise = Projects.findOne({ where: { url: req.params.url } })
+  const userId = res.locals.user.id
+
+  const projectsPromise = Projects.findAll({ where: { userId } })
+  const projectPromise = Projects.findOne({
+    where: { url: req.params.url, userId }
+  })
 
   const [projects, project] = await Promise.all([
     projectsPromise,
@@ -71,8 +79,17 @@ exports.projectDetail = async (req, res, next) => {
 }
 
 exports.formEdit = async (req, res, next) => {
-  const projects = await Projects.findAll()
-  const project = await Projects.findOne({ where: { id: req.params.id } })
+  const userId = res.locals.user.id
+
+  const projectsPromise = Projects.findAll({ where: { userId } })
+  const projectPromise = Projects.findOne({
+    where: { id: req.params.id, userId }
+  })
+
+  const [projects, project] = await Promise.all([
+    projectsPromise,
+    projectPromise
+  ])
 
   // in case the project doesn't exist return null
   if (!project) return next()
@@ -86,7 +103,9 @@ exports.formEdit = async (req, res, next) => {
 }
 
 exports.updateProject = async (req, res) => {
-  const projects = await Projects.findAll()
+  const userId = res.locals.user.id
+  const projects = await Projects.findAll({ where: { userId } })
+
   const { name } = req.body
 
   let errors = []
