@@ -91,5 +91,8 @@ module.exports = () => {
 
   router.get('/logout', authController.logout)
 
+  // forgot password
+  router.get('/forgot-password', usersController.formForgotPassword)
+
   return router
 }

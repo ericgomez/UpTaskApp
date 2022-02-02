@@ -43,3 +43,9 @@ exports.createCount = async (req, res, next) => {
     })
   }
 }
+
+exports.formForgotPassword = (req, res) => {
+  res.render('forgotPassword', {
+    namePage: 'Forgot Password in UpTask'
+  })
+}
