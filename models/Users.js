@@ -38,6 +38,10 @@ const Users = db.define(
         }
       }
     },
+    status: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0
+    },
     token: Sequelize.STRING,
     expirationToken: Sequelize.DATE
   },
