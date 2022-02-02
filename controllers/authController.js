@@ -63,5 +63,20 @@ exports.forgotPassword = async (req, res) => {
 }
 
 exports.resetPassword = async (req, res) => {
-  res.json(req.params.token)
+  const { token } = req.params
+
+  const user = await Users.findOne({
+    where: {
+      token
+    }
+  })
+
+  if (!user) {
+    req.flash('error', 'User not valid')
+    res.redirect('/forgot-password')
+  }
+
+  res.render('resetPassword', {
+    namePage: 'Reset Password'
+  })
 }
