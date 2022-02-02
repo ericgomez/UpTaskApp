@@ -1,5 +1,6 @@
 const { Sequelize } = require('sequelize')
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 const crypto = require('crypto')
 
 const Users = require('../models/Users')
@@ -86,6 +87,7 @@ exports.formResetPassword = async (req, res) => {
 
 exports.resetPassword = async (req, res) => {
   const { token } = req.params
+  const { password } = req.body
 
   const user = await Users.findOne({
     where: {
@@ -101,4 +103,15 @@ exports.resetPassword = async (req, res) => {
     req.flash('error', 'User not valid')
     res.redirect('/forgot-password')
   }
+
+  // hash password
+  user.password = bcrypt.hashSync(password, 10)
+  // delete token and expiration of reset password
+  user.token = null
+  user.expirationToken = null
+
+  await user.save()
+
+  req.flash('correct', 'Your password is updated successfully')
+  res.redirect('/login')
 }
