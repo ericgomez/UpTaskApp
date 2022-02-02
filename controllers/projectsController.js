@@ -38,8 +38,9 @@ exports.createProject = async (req, res) => {
       errors
     })
   } else {
+    const userId = res.locals.user.id
     // TODO: insert in DB
-    const projects = await Projects.create({ name })
+    await Projects.create({ name, userId })
     res.redirect('/')
   }
 }
