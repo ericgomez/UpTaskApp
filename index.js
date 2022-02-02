@@ -57,8 +57,13 @@ app.use(passport.session())
 
 // Pass helper to application
 app.use((req, res, next) => {
+  // // data of user
+  // console.log(req.user)
+
   res.locals.varDump = helpers.varDump
   res.locals.messages = req.flash()
+  res.locals.user = req.user || null
+
   next()
 })
 

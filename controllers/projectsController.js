@@ -2,6 +2,8 @@ const Projects = require('../models/Projects')
 const Tasks = require('../models/Tasks')
 
 exports.projectsHome = async (req, res) => {
+  console.log(res.locals.user)
+
   const projects = await Projects.findAll()
 
   res.render('index', {
