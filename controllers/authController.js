@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 const crypto = require('crypto')
 
 const Users = require('../models/Users')
+const sendEmail = require('../handlers/email')
 
 const Op = Sequelize.Op
 
@@ -60,8 +61,16 @@ exports.forgotPassword = async (req, res) => {
 
     // url
     const resetUrl = `http://${req.headers.host}/reset-password/${user.token}`
-    console.log(resetUrl)
+
+    // Send Email
+    await sendEmail.sendEmail({
+      user,
+      subject: 'Password reset ✔',
+      resetUrl,
+      file: 'reset-password'
+    })
   } catch (error) {
+    console.log(error)
     res.redirect('/forgot-password')
   }
 }
