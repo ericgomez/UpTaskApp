@@ -81,9 +81,10 @@ module.exports = () => {
     tasksController.deleteTask
   )
 
-  // create new count
-  router.get('/create-count', usersController.formCreateCount)
-  router.post('/create-count', usersController.createCount)
+  // create new account
+  router.get('/create-account', usersController.formCreateAccount)
+  router.post('/create-account', usersController.createAccount)
+  router.get('/confirm/:email', usersController.confirmAccount)
 
   // login
   router.get('/login', usersController.formLogin)

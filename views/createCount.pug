@@ -4,7 +4,7 @@ html(lang="en")
     include partials/header
   body.login
     .container-form 
-      h1 Create a new count in UpTask 
+      h1 Create a new account in UpTask 
 
       if Object.keys(locals.messages).length
         .alert
@@ -13,7 +13,7 @@ html(lang="en")
               .alert(class=`${category}`)
                 p #{error}
 
-      form#form.box.box-login(method="post" action="/create-count")
+      form#form.box.box-login(method="post" action="/create-account")
         .campo 
           label(for="email") Email
           input(type="text" name="email" placeholder="Email" value= email)
@@ -21,6 +21,6 @@ html(lang="en")
           label(for="password") Password
           input(type="password" name="password" placeholder="Password" value= password)
         .campo.send
-          input.button(type="submit" value="Create count")
+          input.button(type="submit" value="Create account")
         .campo 
           a(href="/login") Login

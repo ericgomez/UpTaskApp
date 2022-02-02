@@ -17,7 +17,8 @@ passport.use(
         // find the user based on email
         const user = await Users.findOne({
           where: {
-            email
+            email,
+            status: 1
           }
         })
 

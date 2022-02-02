@@ -1,9 +1,9 @@
 const Users = require('../models/Users')
 const sendEmail = require('../handlers/email')
 
-exports.formCreateCount = (req, res) => {
-  res.render('createCount', {
-    namePage: 'Create Count in UpTask'
+exports.formCreateAccount = (req, res) => {
+  res.render('createAccount', {
+    namePage: 'Create Account in UpTask'
   })
 }
 
@@ -16,11 +16,11 @@ exports.formLogin = (req, res) => {
   })
 }
 
-exports.createCount = async (req, res, next) => {
+exports.createAccount = async (req, res, next) => {
   // read data from form
   const { email, password } = req.body
 
-  // create new count
+  // create new account
   try {
     await Users.create({
       email,
@@ -38,12 +38,12 @@ exports.createCount = async (req, res, next) => {
     // Send email
     await sendEmail.sendEmail({
       user,
-      subject: 'Confirm count UpTask ✔',
+      subject: 'Confirm Account UpTask ✔',
       confirmUrl,
-      file: 'confirm-count'
+      file: 'confirm-account'
     })
 
-    req.flash('correct', 'A message was send to your email, confirm count')
+    req.flash('correct', 'A message was send to your email, confirm account')
     res.redirect('/login')
   } catch (error) {
     // creating error with flash message
@@ -52,14 +52,36 @@ exports.createCount = async (req, res, next) => {
       error.errors.map(error => error.message)
     )
 
-    res.render('createCount', {
+    res.render('createAccount', {
       // using error
       messages: req.flash(),
-      namePage: 'Create Count in UpTask',
+      namePage: 'Create Account in UpTask',
       email,
       password
     })
   }
+}
+
+exports.confirmAccount = async (req, res) => {
+  const { email } = req.params
+
+  const user = await Users.findOne({
+    where: {
+      email
+    }
+  })
+
+  if (!user) {
+    req.flash('error', 'User not valid')
+    res.redirect('/create-account')
+  }
+
+  user.status = 1
+
+  await user.save()
+
+  req.flash('correct', 'Your account is activated successfully')
+  res.redirect('/login')
 }
 
 exports.formForgotPassword = (req, res) => {
