@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 // import express-validator
-const { body } = require('express-validator/check')
+const { body } = require('express-validator')
 
 // import the controller
 const projectsController = require('../controllers/projectsController')
@@ -93,6 +93,7 @@ module.exports = () => {
 
   // forgot password
   router.get('/forgot-password', usersController.formForgotPassword)
+  router.post('/forgot-password', authController.forgotPassword)
 
   return router
 }
