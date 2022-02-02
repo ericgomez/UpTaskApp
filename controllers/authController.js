@@ -1,4 +1,5 @@
 const passport = require('passport')
+const crypto = require('crypto')
 
 const Users = require('../models/Users')
 
@@ -39,10 +40,28 @@ exports.forgotPassword = async (req, res) => {
     if (!user) {
       req.flash('error', 'User not found')
 
-      res.render('forgotPassword', {
-        namePage: 'Forgot Password in UpTask',
-        messages: req.flash()
-      })
+      // res.render('forgotPassword', {
+      //   namePage: 'Forgot Password in UpTask',
+      //   messages: req.flash()
+      // })
+
+      res.redirect('/forgot-password')
     }
-  } catch (error) {}
+
+    // generate token
+    user.token = crypto.randomBytes(20).toString('hex')
+    user.expirationToken = new Date() + 3600000 // 1 hour
+
+    await user.save()
+
+    // url
+    const resetUrl = `http://${req.headers.host}/forgot-password/${user.token}`
+    console.log(resetUrl)
+  } catch (error) {
+    res.redirect('/forgot-password')
+  }
+}
+
+exports.resetPassword = async (req, res) => {
+  res.json(req.params.token)
 }

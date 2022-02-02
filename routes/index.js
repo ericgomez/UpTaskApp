@@ -95,5 +95,7 @@ module.exports = () => {
   router.get('/forgot-password', usersController.formForgotPassword)
   router.post('/forgot-password', authController.forgotPassword)
 
+  router.get('/forgot-password/:token', authController.resetPassword)
+
   return router
 }
