@@ -6,6 +6,8 @@ const session = require('express-session')
 const cookieParse = require('cookie-parser')
 const passport = require('./config/passport')
 
+require('dotenv').config()
+
 const routes = require('./routes')
 
 // helpers with some functions
@@ -70,4 +72,6 @@ app.use((req, res, next) => {
 //routes of the application
 app.use('/', routes())
 
-app.listen(3000)
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Server is running...')
+})
